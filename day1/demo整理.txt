@@ -1,0 +1,12 @@
+demo思路：
+监听用户键盘输入，同时添加激活样式并播放音乐
+知识点
+document.querySelector选择器
+    querySelector选择器参数可以是平常我们设置样式时使用的选择器(组合),和getElement系列不同的是该方法返回的节点是静态的
+    querySelectAll 返回一个Nodelist(like Array)但支持forEach遍历
+    静态相对动态来说 节点的变动不会影响到上次返回的结果，如果不重新获取的话
+audio标签
+    audio.play 播放音频
+    audio.currentTime 重新赋值保证每次键盘事件触发都会重新播放
+css3 transform变换
+    transform变化时会新开一个图层（layer), 变化结束后元素回到默认图层

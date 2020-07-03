@@ -1,0 +1,89 @@
+.center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);  
+}
+html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+.clock{
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border: 10px solid peru;
+    border-radius: 50%;
+    box-shadow: inset 0 0 3px 1px #000;
+    background-image: url('../img/OW_Hanzo.png');
+    background-repeat: no-repeat;
+    /* background-size: 100% 100%; */
+}
+.clock::after{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    content: "";
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    background: peru;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 1px #000;
+}
+.clock .mark{
+    transform-origin: 0% 0%;
+    width: 10px;
+    height: 10%;
+    background: peru;
+    box-shadow: 0 0 1px 1px peru;
+}
+.clock > div{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.sec::after{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    display: block;
+    content: "";
+    width: 10px;
+    height: 50%;
+    transform: translate(-50%, 0);
+    background: red;
+    border-radius: 50%;
+    opacity: .5;
+}
+.min::after{
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    display: block;
+    content: "";
+    width: 15px;
+    height: 35%;
+    transform: translate(-50%, 0);
+    background: green;
+    border-radius: 50%;
+    opacity: .5;
+}
+.hour::after{
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    display: block;
+    content: "";
+    width: 20px;
+    height: 20%;
+    transform: translate(-50%, 0);
+    background: black;
+    border-radius: 50%;
+    opacity: .5;
+}
