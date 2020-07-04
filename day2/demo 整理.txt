@@ -1,0 +1,5 @@
+demo 思路: 
+利用Date实例对象计算出时分秒配合css3的transform属性以及定时器做时钟动画
+知识点:
+常见动画定时器选择
+setInterval setTimeout requestAninationFrame
