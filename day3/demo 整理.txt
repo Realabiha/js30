@@ -1,0 +1,6 @@
+demo 思路：
+尝试使用css的变量,在js中改变变量值来改变样式，与css预处理语言(sass/scss)不同,预处理语言是在编译之前解析成css
+知识点：
+css函数 blur(1px)/calc(100%-10px)   
+CSSStyleDeclaration.setProperty() 方法接口为一个声明了CSS样式的对象设置一个新的值 注意区分对象属性访问器(./[], 并且Symbol属性只能通过后者访问)
+document.documentElement document.querySelector('html') document.querySelector(':root')
