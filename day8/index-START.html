@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<div class="board">
+  <input type="color" value="颜色">
+  <input type="button" value="橡皮擦">
+  <input type="button" value="清除">
+  <input type="button" value="撤销">
+  <input type="range" value="线条" min="1" max="100">
+</div>
+<script>
+  const draw = document.querySelector('#draw');
+  draw.width = window.innerWidth;
+  draw.height = window.innerHeight;
+  const ctx = draw.getContext('2d');
+  let x, y; //起始点坐标
+  let deg = 0;
+  ctx.lineWidth = 10;
+  let begin = false; //鼠标点击开始绘图(画布鼠标按下 文档鼠标弹起)
+
+
+
+  document.onmouseup = handleUp;
+  draw.onmousedown = handleDown;
+  draw.onmouseenter = handleEnter;
+  document.onmousemove = handleMove;
+
+
+  function handleDown(e){
+    let {offsetX, offsetY} = e;
+    [x, y] = [offsetX, offsetY];
+    begin = true;
+    up = false;
+  }
+  function handleMove(e){
+    if(!begin) return;
+
+    ctx.strokeStyle = `hsl(${deg%360}, 100%, 50%)`;
+    deg ++;
+
+
+
+    let {offsetX, offsetY} = e;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(offsetX, offsetY);
+    ctx.stroke();
+    [x, y] = [offsetX, offsetY];
+  }
+  function handleUp(e){
+    begin = false;
+  }
+  function handleEnter(e){
+    let {offsetX, offsetY} = e;
+    [x, y] = [offsetX, offsetY];
+  }
+
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+  #draw{
+    border: 1px dashed;
+  }
+  .board{
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+  .board:hover{
+    background: rgba(0, 0, 0, .3);
+    opacity: 1;
+  }
+</style>
+
+</body>
+</html>
