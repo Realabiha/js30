@@ -1,0 +1,4 @@
+demo 思路：
+canvas api
+知识点：
+canvas

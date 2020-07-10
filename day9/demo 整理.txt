@@ -1,0 +1,4 @@
+demo 思路：
+console对象
+知识点：
+不一样的console
