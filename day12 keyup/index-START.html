@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+  const key = [38, 38, 40, 32];
+  const input = [];
+  window.addEventListener('keyup', handleKeyup);
+  function handleKeyup(e){
+    input.push(e.keyCode)
+    // input.splice(0, input.length - key.length);
+    input.splice(-key.length, input.length - key.length);
+    if(input.toString() === key.toString()) cornify_add();  
+  }
+</script>
+</body>
+</html>
