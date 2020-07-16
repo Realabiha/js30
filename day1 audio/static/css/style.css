@@ -8,7 +8,7 @@ html, body{
 .board{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     position: absolute;
     left: 0;
     top: 0;
@@ -19,27 +19,17 @@ html, body{
     perspective: 20px;
 
 }
-.board .show{
+.board ul{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    opacity: 0;
-} 
-.board .active{
-    font-size: 100px;
-    color: peru;
-    transform-origin: center;
-    text-shadow: 1px 1px 1px 1px #000;
-    transform: translateZ(5px);
-    opacity: 1;
-    transition: transform .3s;
+    flex-direction: column;
 }
-
-.board {
-    font-size: 50px;
+.board li{
     list-style-type: none;
-    opacity: .5;
+    width: 150px;
+    height: 20px;
+    background: peru;
+    margin: 5px;
+    opacity: .01;
 }
 .wrap{
     display: flex;

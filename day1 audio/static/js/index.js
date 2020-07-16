@@ -3,8 +3,8 @@
 window.addEventListener('keydown', handleKeyDown);
 window.addEventListener('keyup', handleKeyUp);
 const audios = document.querySelectorAll('audio');
-const show = document.querySelector('.show')
-const li = document.getElementsByTagName('li');
+const ul = document.querySelectorAll('.board ul');
+const li = document.querySelectorAll('.board li');
 
 const keys = [
     {key: 'a', code: 65}, {key: 's', code: 83}, {key: 'd', code: 68}, {key: 'f', code: 70}, 
@@ -15,12 +15,13 @@ let index = 0;
 
 
 
-
 function handleKeyDown(e){
     const btn = document.querySelector(`div[data-key="${e.keyCode}"]`);
     if(!btn) return;
     playSound(btn);   
-    lightKey(e);
+
+
+    
 }
 function handleKeyUp(e){
     const btn = document.querySelector(`div[data-key="${e.keyCode}"]`);
@@ -28,7 +29,14 @@ function handleKeyUp(e){
     btn.classList.remove('play')
     const key = btn.querySelector('span');
     key.classList.remove('light');
-    show.classList.remove('active');
+
+    ul.forEach(v => {
+        Array.from(v.children).forEach((l,i) => {
+            setTimeout( _ => {
+                // l.style.opacity = (time % 30 + 1) * 0.1
+            })
+        })
+    })
 }
 
 function playSound(btn){
@@ -41,11 +49,20 @@ function playSound(btn){
     audio.play();
 }
 
-function lightKey(e){
-    console.log(e.key)
-    show.textContent = e.key.toUpperCase(); 
-    show.classList.add('active');
-}
+
+
+
+// const key = [65, 83, 68, 65];
+// const input = [];
+// window.addEventListener('keyup', handleKeyup);
+//     function handleKeyup(e){
+//     input.push(e.keyCode)
+//     // input.splice(0, input.length - key.length);
+//     input.splice(-key.length, input.length - key.length);
+//     if(input.toString() === key.toString()) cornify_add();  
+// }
+
+
 
 
 
