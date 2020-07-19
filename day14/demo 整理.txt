@@ -1,0 +1,6 @@
+demo 思路:
+    js的值|引用|拷贝
+    Number String Null Undefined Boolean Symbol | Object Function
+    对象(数组)的克隆  
+    Object.assign() 深度不够(浅克隆)  
+    JSON 有限制(函数不会被拷贝)
