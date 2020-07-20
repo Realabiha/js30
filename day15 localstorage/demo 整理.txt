@@ -1,0 +1,14 @@
+demo 思路：
+localStorage使用
+知识点
+客户端缓存/html表单提交/事件target
+document.cookie domain指定共享域名 developer.mozilla.org子域名 org顶级域名 mozilla二级域名 
+window.localStorage 同时打开两个相同的窗口，他们之间是互通的，可以监听window的storage事件
+window.sessionStorage/session
+
+存储大小|存储时效
+
+
+form submit method action | js + api
+
+target(触发元素) | currentTarget(绑定事件元素)
