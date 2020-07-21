@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥WOAH!</h1>
+  </div>
+
+  <style>
+  html {
+    color: black;
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .hero {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    transform-style: preserve-3d;
+  }
+
+  h1 {
+    transform: rotate(0);
+    text-shadow: 10px 10px 0 rgba(0,0,0,0);
+    font-size: 100px;
+  }
+  </style>
+
+<script>
+  const wrap = document.querySelector('.hero');
+  const text = document.querySelector('h1');
+  let per = 100;
+
+  wrap.onmousemove = handleMove;
+
+
+
+  function handleMove(e){
+    // clientX = text.offsetLeft + offsetX     target == text
+    let {offsetX, offsetY, target, currentTarget, clientX, clientY} = e;
+    let blurX = Math.floor(clientX / currentTarget.offsetWidth * 100) * 2 - per,
+        blurY = Math.floor(clientY / currentTarget.offsetHeight * 100) * 2 - per;
+
+    wrap.style.perspectiveOrigin = `
+      ${blurX}px ${blurY}px
+    `
+
+    text.style.transform = `
+      scale(${Math.abs(100/blurX)}) 
+    `
+
+    text.style.textShadow = `
+      ${-1*blurX}px ${-1*blurY}px 0 #0ff, 
+      ${-1.1*blurX}px ${-1.1*blurY}px 1px #f0f, 
+      ${-1.2*blurX}px ${-1.2*blurY}px 2px #ff0 
+    `
+  }
+
+
+</script>
+</body>
+</html>

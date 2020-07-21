@@ -1,0 +1,5 @@
+demo 思路：
+鼠标事件和dom的offset位置配合文字阴影
+知识点：
+offsetX/offsetWidth/offsetLeft text-shadow
+百分比做计算 数字做计算
