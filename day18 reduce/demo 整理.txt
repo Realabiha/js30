@@ -1,0 +1,9 @@
+demo 思路：
+数组每一项整合到一起 reduce使用
+知识点：
+加减乘除余整百分比
+%(余/模)
+解构赋值
+forEach 修改原数组中断 
+every return false 中端
+some return 中断
