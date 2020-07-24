@@ -1,0 +1,6 @@
+demo 思路：
+navigator mediaDevice初试
+知识点：
+navigator对象
+canvas画图/保存
+图片rgba修改
