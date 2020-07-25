@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Detection</title>
+</head>
+<body>
+
+  <div class="words" contenteditable>
+  </div>
+
+<script>
+  let STT = window.SpeechRecognition || window.webkitSpeechRecognition;
+  try {
+    const stt = new STT();
+    stt.lang = 'zh';
+    stt.interimResults = false;
+    
+    stt.onerror = handleError;
+    stt.onnomatch = handleNoMatch;
+    stt.onresult = handleResult;
+    stt.onend = stt.start;
+    stt.start();
+  
+    function handleResult(e){
+      console.log(e, 'result');
+      let text = [...e.results]
+        .map(e => e[0])
+        .map(e => e.transcript)
+        .join('');
+      console.log(text);
+  
+    }
+
+    function handleNoMatch(e){
+      console.log(e, 'nomatch');
+    }
+
+    function handleError(e){
+      console.log(e, 'error');
+    }
+  } catch (error) {
+    console.error(error);    
+  }
+
+</script>
+
+
+  <style>
+    html {
+      font-size: 10px;
+    }
+
+    body {
+      background: #ffc600;
+      font-family: 'helvetica neue';
+      font-weight: 200;
+      font-size: 20px;
+    }
+
+    .words {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      padding: 1rem 2rem 1rem 5rem;
+      background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+      background-size: 100% 3rem;
+      position: relative;
+      line-height: 3rem;
+    }
+    
+    p {
+      margin: 0 0 3rem;
+    }
+
+    .words:before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      left: 30px;
+      bottom: 0;
+      border: 1px solid;
+      border-color: transparent #efe4e4;
+    }
+  </style>
+
+</body>
+</html>
