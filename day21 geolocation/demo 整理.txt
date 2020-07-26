@@ -1,0 +1,2 @@
+demo 思路：
+navigator.geolocation 初试
