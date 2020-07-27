@@ -1,0 +1,10 @@
+demo 思路：
+相对视口就是说要考虑滚动条
+浏览器视口 client  screen 设备显示屏
+Element.getBoundingClientRect 获取元素相对视口(client)位置和宽高
+
+知识点：
+documentElement clientWidth clientHeight
+Element offsetLeft|offsetTop|offsetWidth|offsetHeight
+window PageXOffset scrollLeft screenX screenLeft pageYOffset scrollTop screenY screenTop  
+event offsetX offsetY clientX clientY screenX screenY
