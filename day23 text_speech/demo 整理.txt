@@ -1,0 +1,12 @@
+demo 思路：
+Web Speech API SpeechSynthesis 语音合成
+
+知识点：
+dom选取器
+query Nodelist
+getElement HTMLCollection
+
+dom data-prop的实际应用
+
+addEventListener 监听事件
+oneventnamt 对象的属性 可被覆盖
