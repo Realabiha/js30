@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+</head>
+<body class="bod">
+
+  <div class="one test">
+    <div class="two">
+      <div class="three">
+      </div>
+      <div class="three">
+      </div>
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after { 
+    box-sizing: inherit; 
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+  }
+
+  .three {
+    background: coral;
+  }
+  .four{
+    background: #ff0;;
+  }
+  .five{
+    background: #f0f;
+  }
+</style>
+
+<button></button>
+<script>
+  const divs = document.querySelectorAll('div');
+  const one = document.querySelector('.one');
+
+  function handleClick(e){
+    // console.log(e.path, 'path');
+    // console.log(e.target, 'target')
+    // console.log(e.currentTarget, 'currentTarget')
+    // e.stopPropagation()
+    console.log(this.classList.value)
+    // capture one test \ two \ three
+    // bubble thres \ two \ one test
+  }
+  divs.forEach(dom => {
+
+    // dom.addEventListener('click', handleClick, {capture: false, once: false})
+  })
+
+  console.log( delegate('click', one, '.three', handleClick) );
+
+
+
+  function delegate(type, parent, selector, cb){
+    parent.addEventListener(type, e => {
+      let node = e.target;
+      if( node.matches && !node.matches(selector) ){
+        node = node.parentNode;
+      }else{
+        cb.call(node, e);
+      }
+    })
+  }
+
+</script>
+</body>
+</html>
