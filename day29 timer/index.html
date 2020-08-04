@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>
+  <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="timer">
+    <div class="timer__controls">
+      <button data-time="20" class="timer__button">20 Secs</button>
+      <button data-time="300" class="timer__button">Work 5</button>
+      <button data-time="900" class="timer__button">Quick 15</button>
+      <button data-time="1200" class="timer__button">Snack 20</button>
+      <button data-time="3600" class="timer__button">Lunch Break</button>
+      <form name="customForm" id="custom">
+        <input type="text" name="minutes" placeholder="Enter Minutes">
+      </form>
+    </div>
+    <div class="display">
+      <h1 class="display__time-left"></h1>
+      <p class="display__end-time"></p>
+    </div>
+  </div>
+
+  <script>
+    const btns = document.querySelectorAll('[data-time]');
+    const counter = document.querySelector('.display__time-left');
+    const stop = document.querySelector('.display__end-time'); 
+    const form = document.querySelector('#custom');
+    let timer;
+    btns.forEach(btn => {
+      btn.addEventListener('click', handleClick, {});
+    })
+    form.addEventListener('submit', handleSubmit, {});
+    function handleClick(e){ render(this.dataset.time * 1000) }
+    function handleSubmit(e){
+      e.preventDefault();
+      const time = parseInt(this.minutes.value); 
+      time > 0 && render(time * 60000)
+    }
+    function render(end){
+      clearInterval(timer);
+      end = +new Date + end + 1000;
+      let {h, m, s} = dateToHms(end);
+      stop.textContent = `${h} : ${m} : ${s}`;
+      timer = setInterval( _ => {
+        let {h,m,s} = timeToHms(end - new Date);
+        counter.textContent = `${h} : ${m} : ${s}`
+      }, 16.6)
+    }
+    function dateToHms(timestamp){
+      let h = new Date(timestamp).getHours();
+      let m = new Date(timestamp).getMinutes();
+      let s = new Date(timestamp).getSeconds()
+      return {h: formatHms(h), m: formatHms(m), s: formatHms(m)}
+    }
+    function timeToHms(time){
+      let h = Math.floor(time / 3600000)
+      let m = Math.floor(time % 3600000 / 60000)
+      let s = Math.floor(time % 3600000 % 60000 / 1000)
+      return {h: formatHms(h), m: formatHms(m), s: formatHms(s)}
+    }
+    function formatHms(num){
+      return num < 10 ? '0' + num : num;
+    }
+    
+    
+
+  </script>
+</body>
+</html>
