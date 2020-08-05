@@ -6,10 +6,48 @@
   <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="style.css">
 </head>
+<style>
+  .test{
+    position: relative;
+    width: 50px;
+    height: 100px;
+    font-size: 5em;
+    color:yellowgreen;
+    overflow: hidden;
+  }
+  ul.transition{
+    top: 0;
+    transition: top .5s linear;
+  }
+  ul{
+    position: absolute;
+    top: -100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 200%;
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    transition: top 0s linear;
+  }
+  li{
+    list-style-type: none;
+    background: #fff;
+  }
+  /* li:last-of-type{
+    transition: all 0s liner 0.5s;
+  } */
+  .display__time-left.end{
+    color: greenyellow;
+  }
+</style>
 <body>
   <div class="timer">
     <div class="timer__controls">
-      <button data-time="20" class="timer__button">20 Secs</button>
+      <button data-time="5" class="timer__button">20 Secs</button>
       <button data-time="300" class="timer__button">Work 5</button>
       <button data-time="900" class="timer__button">Quick 15</button>
       <button data-time="1200" class="timer__button">Snack 20</button>
@@ -21,6 +59,12 @@
     <div class="display">
       <h1 class="display__time-left"></h1>
       <p class="display__end-time"></p>
+      <div class="test">
+        <ul>
+          <li>0</li>
+          <li>59</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -30,6 +74,8 @@
     const stop = document.querySelector('.display__end-time'); 
     const form = document.querySelector('#custom');
     let timer;
+    const WARNING = '00 : 00 : 00';
+
     btns.forEach(btn => {
       btn.addEventListener('click', handleClick, {});
     })
@@ -46,8 +92,11 @@
       let {h, m, s} = dateToHms(end);
       stop.textContent = `${h} : ${m} : ${s}`;
       timer = setInterval( _ => {
-        let {h,m,s} = timeToHms(end - new Date);
-        counter.textContent = `${h} : ${m} : ${s}`
+        const left = end - new Date
+        if(left < 1000) return handleTimeup();
+        let {h,m,s} = timeToHms(left);
+        counter.classList.remove('end');
+        counter.textContent = `${h} : ${m} : ${s}`;
       }, 16.6)
     }
     function dateToHms(timestamp){
@@ -65,9 +114,37 @@
     function formatHms(num){
       return num < 10 ? '0' + num : num;
     }
-    
-    
+    function handleTimeup(){
+      clearInterval(timer);
+      counter.classList.add('end');
+      counter.textContent = WARNING;
+      // stop.textContent = WARNING;
+    }
 
+
+
+    
+    const ul = document.querySelector('ul');    
+    const lis = document.querySelectorAll('li');
+
+    function counterdown(){
+      const sec = new Date().getSeconds()
+      console.log(sec);
+      lis[0].textContent = sec;
+      lis[1].textContent = sec;
+      setTimeout(_ => {
+        counterdown();
+      }, 1000)
+    }
+    counterdown();
+    function toggleClass(){
+      ul.classList.toggle('transition');
+      setTimeout(() => {
+        toggleClass()
+      }, 520);
+    }
+    toggleClass();
+    
   </script>
 </body>
 </html>

@@ -2,4 +2,4 @@ demo 知识点：
 定时器 结束时间剪掉当前时间 计算时分秒
 数值转换 parseInt
 RAF
-
+tag data-prop
