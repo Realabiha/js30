@@ -36,7 +36,7 @@
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
-  const GAMETIME = 100000;
+  const GAMETIME = 10000;
   let isOver = false,
       hole,
       delay,
@@ -48,41 +48,55 @@
     return last;
   }, {});
 
+  const handleProxy = function(target){
+    return {
+      get(target, prop){
+        return target[prop]
+      },
+      set(target, prop, value){
+        target[prop] = value;
+        if(value){
+          moles[prop].addEventListener('click', handlePlay, {});
+          moles[prop].style.top = 0;
+        }else{
+          moles[prop].removeEventListener('click', handlePlay, {});
+          moles[prop].style.top = '100%';
+        }
+   
+      }
+    }
+  }
+
+  const proxyMap = new Proxy(mapData, handleProxy(mapData))
+
   const handlePlay = function(e){
     console.log(mapData[hole], 'click');
-    if(!mapData[hole]) return;
+    if(!proxyMap[hole]) return;
     scoreBoard.textContent = ++score;
-    moles[hole].removeEventListener('click', handlePlay, {});
-    mapData[hole] = false;
   }
-  const compareLast = function(){
-    hole = getRandomHole();
-    if(last != undefined){
-      last == hole ? compareLast() : '';
-      moles[last].removeEventListener('click', handlePlay, {});
-      mapData[last] = false;
-      moles[last].style.top = '100%';
-    }
-    return hole;
-  }
+  const compareLast = _ => getRandomHole();
   const bindEvent = function(){
     if(isOver){
       isOver = false;
-      alert('游戏结束')
+      scoreBoard.textContent = 0;
+      alert(`游戏结束, 分数：${score}`)
     } 
-    hole = compareLast();
-    last = hole;
-    mapData[hole] = true;
-    moles[hole].addEventListener('click', handlePlay, {});
-    moles[hole].style.top = 0;
-    setTimeout(_ => {
+    const random = compareLast();
+    if(hole == random){
       bindEvent();
-    }, delay)
+    }else{
+      hole = random;
+      proxyMap[hole] = true;
+      setTimeout(_ => {
+        proxyMap[hole] = false;
+        bindEvent();
+      }, delay);
+    }
   }
   
   
   const startGame = function(){
-    delay = getRandomDelay(2000, 1000);
+    delay = getRandomDelay(1500, 800);
     bindEvent();
     setTimeout(_ => isOver = true, GAMETIME);
   }
